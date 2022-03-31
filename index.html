@@ -6,24 +6,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
 </head>
 <body>
-    <div class="player-side">
-        <div class="reaction-time">100ms</div>
-        <div class="gesture">
-            <div class="gesture-icon"><img src="img/player-rock.svg"></div>
-            <div class="gesture-text">Rock!</div>
+    <div id="difficulty-modal" class="modal">
+        <div class="modal-content">
+            <span class="diff-select">Select your Difficulty:</span>
+            <button class="diff-button" id="diff-easy">Easy</button>
+            <button class="diff-button" id="diff-medium">Medium</button>
+            <button class="diff-button" id="diff-hard">Hard</button>
         </div>
-        <div class="scoreboard">&#9671;&#9671;&#9670;</div>
     </div>
-    <div class="opponent-side">
-        <div class="reaction-time">0ms</div>
-        <div class="gesture">
-            <div class="gesture-icon"><img src="img/opponent-paper.svg"></div>
-            <div class="gesture-text">Paper!</div>
+
+    <div class="game">
+        <div class="player-side">
+            <div class="reaction-time"></div>
+            <div class="gesture">
+                <div class="gesture-icon"><img src="img/player-rock.svg"></div>
+                <div class="gesture-text">Rock!</div>
+            </div>
+            <div class="scoreboard">&#9671;&#9671;&#9671;</div> <!-- point: &#9670 no point: &#9671  -->
         </div>
-        <div class="scoreboard">&#9670;&#9671;&#9671;</div>
+        <div class="opponent-side">
+            <div class="reaction-time"></div>
+            <div class="gesture">
+                <div class="gesture-icon"><img src="img/opponent-paper.svg"></div>
+                <div class="gesture-text">Paper!</div>
+            </div>
+            <div class="scoreboard">&#9671;&#9671;&#9671;</div> <!-- point: &#9670 no point: &#9671  -->
+        </div>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
