@@ -143,18 +143,29 @@ body{
   #diff-hard {
     background-color: #D22B2B;
   }
-  
-  /* The Close Button */
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
+
+  #reset-game {
+    display: none; /* Only show after game fully resolved */
+    background-color: #1B1212;
   }
-  
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
+
+  #result-modal{
+    display: none; /* Hidden at page load */
+    position: absolute;
+    z-index: 1; /* Sit on top */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */  
+  }
+
+  #result-modal-content {
+    background-color: #F8F8FF;
+    margin: 15% auto; /* 15% from the top and centered */
+    padding: 20px;
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */  
+    text-align: center;
   }

@@ -1,6 +1,9 @@
 let modal = document.getElementById("difficulty-modal");
+let resultModal = document.getElementById("result-modal");
+let resultMessage = document.querySelector("#result-modal h1");
 
 let btnStart = document.getElementById("start-game");
+let btnReset = document.getElementById("reset-game");
 
 let janSpan = document.getElementById("jan");
 let janTSpan = document.getElementById("jan-t");
@@ -13,9 +16,18 @@ let ponTime = randomIntFromInterval(4500, 7000);
 
 let reactionTimeRequired = 1500; //Defaults to 1.5 seconds
 
+
+let playerGestureText = document.querySelector(".player-side .gesture-text");
+let playerGestureIcon = document.querySelector(".player-side .gesture-icon img");
+
+let opponentGestureText = document.querySelector(".opponent-side .gesture-text");
+let opponentGestureIcon = document.querySelector(".opponent-side .gesture-icon img");
+
 let gameHasStarted = false;
 let opponentHasThrown = false;
 let playerHasThrown = false;
+let opponentGesture;
+let playerGesture;
 
 btnStart.onclick = function(e){
     gameHasStarted = true;
@@ -27,25 +39,29 @@ btnStart.onclick = function(e){
 }
 
 document.addEventListener('keydown', (event) => {
-    let gestureText = document.querySelector(".player-side .gesture-text");
-    let gestureIcon = document.querySelector(".player-side .gesture-icon img");
 
     if(gameHasStarted && !playerHasThrown){
         switch (event.code) {
             case "KeyA":
-                gestureText.innerHTML = "Rock!";
-                gestureIcon.src = "img/player-rock.svg";
+                playerGestureText.innerHTML = "Rock!";
+                playerGestureIcon.src = "img/player-rock.svg";
                 playerHasThrown = true; 
+                playerGesture = 1;
+                showResult();
                 break;
             case "KeyS":
-                gestureText.innerHTML = "Paper!";
-                gestureIcon.src = "img/player-paper.svg";
+                playerGestureText.innerHTML = "Paper!";
+                playerGestureIcon.src = "img/player-paper.svg";
                 playerHasThrown = true; 
+                playerGesture = 2;
+                showResult();
                 break;
             case "KeyD":
-                gestureText.innerHTML = "Scissors!";
-                gestureIcon.src = "img/player-scissors.svg";
+                playerGestureText.innerHTML = "Scissors!";
+                playerGestureIcon.src = "img/player-scissors.svg";
                 playerHasThrown = true; 
+                playerGesture = 3;
+                showResult();
                 break;    
             default:
                 break;
@@ -76,23 +92,21 @@ function setDiff(buttonId){
 }
 
 function opponentThrow(rps){
-    let gestureText = document.querySelector(".opponent-side .gesture-text");
-    let gestureIcon = document.querySelector(".opponent-side .gesture-icon img");
     
     switch (rps) {
         case 1:
-            gestureText.innerHTML = "Rock!";
-            gestureIcon.src = "img/opponent-rock.svg"
+            opponentGestureText.innerHTML = "Rock!";
+            opponentGestureIcon.src = "img/opponent-rock.svg"
             break;
 
         case 2:
-            gestureText.innerHTML = "Paper!";
-            gestureIcon.src = "img/opponent-paper.svg"
+            opponentGestureText.innerHTML = "Paper!";
+            opponentGestureIcon.src = "img/opponent-paper.svg"
             break;
 
         case 3:
-            gestureText.innerHTML = "Scissor!";
-            gestureIcon.src = "img/opponent-scissors.svg"
+            opponentGestureText.innerHTML = "Scissor!";
+            opponentGestureIcon.src = "img/opponent-scissors.svg"
             break;
     
         default:
@@ -100,4 +114,54 @@ function opponentThrow(rps){
     }
     
     opponentHasThrown = true;
-  }
+    opponentGesture = rps;
+
+    btnReset.style.display = "block"; // Game can be safely reset after this point
+}
+
+function showResult(){
+    if(playerHasThrown && !opponentHasThrown){
+        console.log("Too early!");
+        resultMessage.innerHTML = "Too early!";
+    } else if(playerGesture === opponentGesture){
+        console.log("It's a draw!");
+        resultMessage.innerHTML = "It's a draw!";
+    } else if(playerWon()){
+        console.log("You won!");
+        resultMessage.innerHTML = "You won!";
+    } else {
+        console.log("You lose!");
+        resultMessage.innerHTML = "You lose!";
+    }
+    resultModal.style.display = "block";
+}
+
+function playerWon(){
+    return (
+        (playerGesture === 1 && opponentGesture === 3) || //rock beats scissors
+        (playerGesture === 2 && opponentGesture === 1) || //paper beats rock
+        (playerGesture === 3 && opponentGesture === 2)    //scissors beats paper
+    )
+}
+
+function resetGame(){
+    gameHasStarted = false;
+    opponentHasThrown = false;
+    playerHasThrown = false;
+    opponentGesture = undefined;
+    playerGesture = undefined;
+
+    btnStart.style.display = "block";
+    janSpan.style.display="none"; janTSpan.style.display="none"
+    kenSpan.style.display="none"; kenTSpan.style.display="none"
+    ponSpan.style.display="none"; ponTSpan.style.display="none"
+
+    playerGestureText.innerHTML = "";
+    playerGestureIcon.src = ""
+    opponentGestureText.innerHTML = "";
+    opponentGestureIcon.src = ""
+
+    resultMessage.innerHTML = "";
+    resultModal.style.display = "none";
+    btnReset.style.display = "none";
+}
