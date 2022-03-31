@@ -26,7 +26,7 @@ body{
     color: #F8F8FF;
 }
 
-.reaction-time{
+.reaction-time, #reaction-time{
     font-size: 32px;
     margin: 16px;
     height: 37px;

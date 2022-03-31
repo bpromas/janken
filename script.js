@@ -14,7 +14,10 @@ let ponTSpan = document.getElementById("pon-t");
 
 let ponTime = randomIntFromInterval(4500, 7000);
 
+let reactionTimeDiv = document.getElementById("reaction-time");
 let reactionTimeRequired = 1500; //Defaults to 1.5 seconds
+let reactionStart;
+let reactionTime;
 
 
 let playerGestureText = document.querySelector(".player-side .gesture-text");
@@ -47,6 +50,8 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-rock.svg";
                 playerHasThrown = true; 
                 playerGesture = 1;
+                reactionTime = Date.now() - reactionStart;
+                reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;
             case "KeyS":
@@ -54,6 +59,8 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-paper.svg";
                 playerHasThrown = true; 
                 playerGesture = 2;
+                reactionTime = Date.now() - reactionStart;
+                reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;
             case "KeyD":
@@ -61,6 +68,8 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-scissors.svg";
                 playerHasThrown = true; 
                 playerGesture = 3;
+                reactionTime = Date.now() - reactionStart;
+                reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;    
             default:
@@ -115,6 +124,7 @@ function opponentThrow(rps){
     
     opponentHasThrown = true;
     opponentGesture = rps;
+    reactionStart = Date.now();
 
     btnReset.style.display = "block"; // Game can be safely reset after this point
 }
@@ -123,6 +133,9 @@ function showResult(){
     if(playerHasThrown && !opponentHasThrown){
         console.log("Too early!");
         resultMessage.innerHTML = "Too early!";
+    } else if(reactionTime > reactionTimeRequired){
+        console.log("Too late!");
+        resultMessage.innerHTML = "Too late!";
     } else if(playerGesture === opponentGesture){
         console.log("It's a draw!");
         resultMessage.innerHTML = "It's a draw!";
@@ -150,11 +163,15 @@ function resetGame(){
     playerHasThrown = false;
     opponentGesture = undefined;
     playerGesture = undefined;
+    reactionStart = undefined;
+    reactionTime = undefined;
 
     btnStart.style.display = "block";
     janSpan.style.display="none"; janTSpan.style.display="none"
     kenSpan.style.display="none"; kenTSpan.style.display="none"
     ponSpan.style.display="none"; ponTSpan.style.display="none"
+
+    reactionTimeDiv.innerHTML = "";
 
     playerGestureText.innerHTML = "";
     playerGestureIcon.src = ""
