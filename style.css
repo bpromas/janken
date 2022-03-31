@@ -31,6 +31,15 @@ body{
     margin: 16px;
     height: 37px;
 }
+
+.callouts{
+    font-size: 64px;
+}
+
+.callouts span, .callouts-translate span {
+    display: none; /* Hidden on page load */
+}
+
 .scoreboard{
     font-size: 32px;
     margin: 16px;
@@ -58,6 +67,28 @@ body{
 
 .opponent-side .gesture-icon img{
     transform: scaleX(-1);
+}
+
+
+
+
+#start-game {
+    display: none;
+    position: absolute;
+    z-index: 1; /* Sit on top */
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+
+    border-style: solid;
+    border-color: #F8F8FF;
+    border-radius: 8px;
+    background-color: #1B1212;
+    color: #F8F8FF;
+    font-size: 32px;
+    padding: 8px;
+    width: 128px;
+    cursor: pointer;
 }
 
 /* The Modal (background) */

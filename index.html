@@ -11,11 +11,13 @@
     <div id="difficulty-modal" class="modal">
         <div class="modal-content">
             <span class="diff-select">Select your Difficulty:</span>
-            <button class="diff-button" id="diff-easy">Easy</button>
-            <button class="diff-button" id="diff-medium">Medium</button>
-            <button class="diff-button" id="diff-hard">Hard</button>
+            <button class="diff-button" id="diff-easy" onclick="setDiff(this.id)">Easy</button>
+            <button class="diff-button" id="diff-medium" onclick="setDiff(this.id)">Medium</button>
+            <button class="diff-button" id="diff-hard" onclick="setDiff(this.id)">Hard</button>
         </div>
     </div>
+
+    <button id="start-game">Start!</button>
 
     <div class="game">
         <div class="player-side">
@@ -28,9 +30,11 @@
         </div>
         <div class="opponent-side">
             <div class="reaction-time"></div>
+            <div class="callouts"><span id="jan">じゃん</span><span id="ken">けん</span><span id="pon">ぽん!</span></div>
+            <div class="callouts-translate"><span id="jan-t">( jan</span><span id="ken-t">ken</span><span id="pon-t">pon! )</span></div>
             <div class="gesture">
-                <div class="gesture-icon"><img src="img/opponent-paper.svg"></div>
-                <div class="gesture-text">Paper!</div>
+                <div class="gesture-icon"><img src=""></div>
+                <div class="gesture-text"></div>
             </div>
             <div class="scoreboard">&#9671;&#9671;&#9671;</div> <!-- point: &#9670 no point: &#9671  -->
         </div>
