@@ -1,1 +1,1 @@
-# janken
+Hand icons created by John Redman at game-icons.net
