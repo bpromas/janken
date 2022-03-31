@@ -32,6 +32,14 @@ body{
     height: 37px;
 }
 
+.instructions{
+    display: flex;
+    height: 110px;
+    align-self: stretch;
+    justify-content: space-evenly;
+}
+
+
 .callouts{
     font-size: 64px;
 }

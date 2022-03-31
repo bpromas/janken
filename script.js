@@ -13,6 +13,47 @@ let ponTime = randomIntFromInterval(4500, 7000);
 
 let reactionTimeRequired = 1500; //Defaults to 1.5 seconds
 
+let gameHasStarted = false;
+let opponentHasThrown = false;
+let playerHasThrown = false;
+
+btnStart.onclick = function(e){
+    gameHasStarted = true;
+    let rps = randomIntFromInterval(1, 3) //1 = rock; 2 = paper; 3 = scissors;
+    btnStart.style.display = "none";
+    setTimeout(function(){janSpan.style.display="inline"; janTSpan.style.display="inline"}, 1500);
+    setTimeout(function(){kenSpan.style.display="inline"; kenTSpan.style.display="inline"}, 3000);
+    setTimeout(function(){ponSpan.style.display="inline"; ponTSpan.style.display="inline"; opponentThrow(rps);}, ponTime);
+}
+
+document.addEventListener('keydown', (event) => {
+    let gestureText = document.querySelector(".player-side .gesture-text");
+    let gestureIcon = document.querySelector(".player-side .gesture-icon img");
+
+    if(gameHasStarted && !playerHasThrown){
+        switch (event.code) {
+            case "KeyA":
+                gestureText.innerHTML = "Rock!";
+                gestureIcon.src = "img/player-rock.svg";
+                playerHasThrown = true; 
+                break;
+            case "KeyS":
+                gestureText.innerHTML = "Paper!";
+                gestureIcon.src = "img/player-paper.svg";
+                playerHasThrown = true; 
+                break;
+            case "KeyD":
+                gestureText.innerHTML = "Scissors!";
+                gestureIcon.src = "img/player-scissors.svg";
+                playerHasThrown = true; 
+                break;    
+            default:
+                break;
+        }
+    }
+  }, false);
+
+
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
 }
@@ -34,10 +75,7 @@ function setDiff(buttonId){
     btnStart.style.display = "block";
 }
 
-function pon(rps){
-    ponSpan.style.display="inline";
-    ponTSpan.style.display="inline";
-
+function opponentThrow(rps){
     let gestureText = document.querySelector(".opponent-side .gesture-text");
     let gestureIcon = document.querySelector(".opponent-side .gesture-icon img");
     
@@ -60,15 +98,6 @@ function pon(rps){
         default:
             break;
     }
-}
-
-btnStart.onclick = function(e){
-    let rps = randomIntFromInterval(1, 3) //1 = rock; 2 = paper; 3 = scissors;
-    btnStart.style.display = "none";
-    setTimeout(function(){janSpan.style.display="inline"}, 1500);
-    setTimeout(function(){janTSpan.style.display="inline"}, 1500);
-    setTimeout(function(){kenSpan.style.display="inline"}, 3000);
-    setTimeout(function(){kenTSpan.style.display="inline"}, 3000);
-    setTimeout(function(){pon(rps)}, ponTime);
-}
-
+    
+    opponentHasThrown = true;
+  }
