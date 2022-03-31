@@ -50,7 +50,7 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-rock.svg";
                 playerHasThrown = true; 
                 playerGesture = 1;
-                reactionTime = Date.now() - reactionStart;
+                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
                 reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;
@@ -59,7 +59,7 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-paper.svg";
                 playerHasThrown = true; 
                 playerGesture = 2;
-                reactionTime = Date.now() - reactionStart;
+                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
                 reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;
@@ -68,7 +68,7 @@ document.addEventListener('keydown', (event) => {
                 playerGestureIcon.src = "img/player-scissors.svg";
                 playerHasThrown = true; 
                 playerGesture = 3;
-                reactionTime = Date.now() - reactionStart;
+                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
                 reactionTimeDiv.innerHTML = `${reactionTime}ms`
                 showResult();
                 break;    
