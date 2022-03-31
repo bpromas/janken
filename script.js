@@ -95,7 +95,6 @@ function setDiff(buttonId){
             reactionTimeRequired = 350;
             break;    
     }
-    console.log(`reaction time required set to ${reactionTimeRequired}ms`);
     modal.style.display = "none";
     btnStart.style.display = "block";
 }
@@ -131,19 +130,14 @@ function opponentThrow(rps){
 
 function showResult(){
     if(playerHasThrown && !opponentHasThrown){
-        console.log("Too early!");
         resultMessage.innerHTML = "Too early!";
     } else if(reactionTime > reactionTimeRequired){
-        console.log("Too late!");
         resultMessage.innerHTML = "Too late!";
     } else if(playerGesture === opponentGesture){
-        console.log("It's a draw!");
         resultMessage.innerHTML = "It's a draw!";
     } else if(playerWon()){
-        console.log("You won!");
         resultMessage.innerHTML = "You won!";
     } else {
-        console.log("You lose!");
         resultMessage.innerHTML = "You lose!";
     }
     resultModal.style.display = "block";
