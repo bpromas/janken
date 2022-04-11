@@ -42,42 +42,47 @@ btnStart.onclick = function(e){
 }
 
 document.addEventListener('keydown', (event) => {
+    switch (event.code) {
+        case "KeyA":
+            throwGesture(1);
+            break;
+        case "KeyS":
+            throwGesture(2);
+            break;
+        case "KeyD":
+            throwGesture(3);
+            break;    
+        default:
+            break;
+    }
+}, false);
 
+function throwGesture(rps){
     if(gameHasStarted && !playerHasThrown){
-        switch (event.code) {
-            case "KeyA":
+        playerGesture = rps;
+        switch (rps) {
+            case 1:
                 playerGestureText.innerHTML = "Rock!";
                 playerGestureIcon.src = "img/player-rock.svg";
-                playerHasThrown = true; 
-                playerGesture = 1;
-                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
-                reactionTimeDiv.innerHTML = `${reactionTime}ms`
-                showResult();
                 break;
-            case "KeyS":
+            case 2:
                 playerGestureText.innerHTML = "Paper!";
                 playerGestureIcon.src = "img/player-paper.svg";
-                playerHasThrown = true; 
-                playerGesture = 2;
-                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
-                reactionTimeDiv.innerHTML = `${reactionTime}ms`
-                showResult();
                 break;
-            case "KeyD":
+            case 3:
                 playerGestureText.innerHTML = "Scissors!";
                 playerGestureIcon.src = "img/player-scissors.svg";
-                playerHasThrown = true; 
-                playerGesture = 3;
-                reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
-                reactionTimeDiv.innerHTML = `${reactionTime}ms`
-                showResult();
-                break;    
+                break;        
             default:
                 break;
         }
+        playerHasThrown = true; 
+        reactionTime = reactionStart === undefined ? 0 : Date.now() - reactionStart;
+        reactionTimeDiv.innerHTML = `${reactionTime}ms`
+        showResult();
     }
-  }, false);
 
+}
 
 function randomIntFromInterval(min, max) { // min and max included 
     return Math.floor(Math.random() * (max - min + 1) + min)
@@ -86,13 +91,13 @@ function randomIntFromInterval(min, max) { // min and max included
 function setDiff(buttonId){
     switch (buttonId) {
         case "diff-easy":
-            reactionTimeRequired = 1500;
+            reactionTimeRequired = 3000;
             break;
         case "diff-medium":
-            reactionTimeRequired = 750;
+            reactionTimeRequired = 1500;
             break;
         case "diff-hard":
-            reactionTimeRequired = 350;
+            reactionTimeRequired = 750;
             break;    
     }
     modal.style.display = "none";

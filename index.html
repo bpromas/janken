@@ -11,15 +11,12 @@
     <div id="difficulty-modal" class="modal">
         <div class="modal-content">
             <p>This is a more skill-based version of rock paper scissors that takes to account the player's reaction time. Your objective is not to guess the opponent's pick, but rather to see it and react to it quickly. Once you press start, the opponent will slowly announce "jan, ken, pon!" and the player must react only after "pon!" is announced</p>
-            <p>There are three difficulty settings, each with a different reaction time requirement: </p>
-            <p>For Easy you're required to react faster than 1500ms,</p> 
-            <p>For Medium, the requirement is 750ms,</p>
-            <p>And for Hard, the requirement is 350ms.</p>
+            <p>There are three difficulty settings, each with a different reaction time requirement. </p>
             <p>Good luck!</p>
             <span class="diff-select">Select your Difficulty:</span>
-            <button class="diff-button" id="diff-easy" onclick="setDiff(this.id)">Easy</button>
-            <button class="diff-button" id="diff-medium" onclick="setDiff(this.id)">Medium</button>
-            <button class="diff-button" id="diff-hard" onclick="setDiff(this.id)">Hard</button>
+            <button class="diff-button" id="diff-easy" onclick="setDiff(this.id)">Easy</button> <span>(3000s)</span>
+            <button class="diff-button" id="diff-medium" onclick="setDiff(this.id)">Medium</button> <span>(1500ms)</span>
+            <button class="diff-button" id="diff-hard" onclick="setDiff(this.id)">Hard</button> <span>(750ms)</span>
             <h6>Hand icons created by John Redman at game-icons.net</h6>
             <h6>A game by Bruno Romaszkiewicz</h6>
         </div>
@@ -41,15 +38,15 @@
             <div class="instructions">
                 <div id="instruction-rock">
                     Press (A)
-                    <img src="img/player-rock.svg">
+                    <img class="clickable-img" src="img/player-rock.svg" onclick="throwGesture(1)">
                 </div>
                 <div id="instruction-paper">
                     Press (S)
-                    <img src="img/player-paper.svg">
+                    <img class="clickable-img" src="img/player-paper.svg" onclick="throwGesture(2)">
                 </div>
                 <div id="instruction-scissors">
                     Press (D)
-                    <img src="img/player-scissors.svg">
+                    <img class="clickable-img" src="img/player-scissors.svg" onclick="throwGesture(3)">
                 </div>
             </div>
             <div class="gesture">

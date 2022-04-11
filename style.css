@@ -39,6 +39,9 @@ body{
     justify-content: space-evenly;
 }
 
+.clickable-img{
+  cursor: pointer;
+}
 
 .callouts{
     font-size: 64px;
@@ -120,6 +123,13 @@ body{
     border: 1px solid #888;
     width: 50%; /* Could be more or less, depending on screen size */  
     text-align: center;
+  }
+
+  p{
+    margin-top: 0;
+  }
+  h6{
+    margin-bottom: 0;
   }
 
   .diff-button {
